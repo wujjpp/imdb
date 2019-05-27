@@ -1,0 +1,8 @@
+.vscode
+.idea
+.git
+*.h5
+__pycache__
+venv
+local_data
+results
