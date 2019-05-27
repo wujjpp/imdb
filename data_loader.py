@@ -7,13 +7,18 @@ import gc
 from monitor import Monitor
 
 # download data from:
-
-imbd_dir = '/home/jp/workspace/aclImdb'
+base_dir = '/home/jp/workspace'
+imbd_dir = os.path.join(base_dir, 'aclImdb')
 train_dir = os.path.join(imbd_dir, 'train')
 test_dir = os.path.join(imbd_dir, 'test')
 
-one_hot_data_file_name = '/home/jp/workspace/imdb-one-hot.npz'
-embedding_data_file_name = '/home/jp/workspace/imdb-embedding.npz'
+one_hot_data_file_name = os.path.join(base_dir, 'imdb-one-hot.npz')
+one_hot_tokenizer_json_file_name = os.path.join(base_dir,
+                                                'imdb-one-hot-tokenizer.json')
+
+embedding_data_file_name = os.path.join(base_dir, 'imdb-embedding.npz')
+embedding_tokenizer_json_file_name = os.path.join(
+    base_dir, 'imdb-embedding-tokenizer.json')
 
 
 def __load_original_data(text_dir):
@@ -82,6 +87,10 @@ def load_one_hot_data(max_words=10000):
                      x_test=x_test,
                      y_test=y_test)
 
+        with Monitor('save tokenizer json file'):
+            with open(one_hot_tokenizer_json_file_name, 'w') as f:
+                f.write(tokenizer.to_json())
+
     else:
         with Monitor('load data from data file'):
             data = np.load(one_hot_data_file_name)
@@ -122,6 +131,8 @@ def load_embedding_data(max_words=10000, maxlen=200):
                      y_train=y_train,
                      x_test=x_test,
                      y_test=y_test)
+        with open(embedding_tokenizer_json_file_name, 'w') as f:
+            f.write(tokenizer.to_json())
 
     else:
         with Monitor('load data from data file'):
