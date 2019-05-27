@@ -131,8 +131,10 @@ def load_embedding_data(max_words=10000, maxlen=200):
                      y_train=y_train,
                      x_test=x_test,
                      y_test=y_test)
-        with open(embedding_tokenizer_json_file_name, 'w') as f:
-            f.write(tokenizer.to_json())
+
+        with Monitor('save tokenizer json file'):
+            with open(embedding_tokenizer_json_file_name, 'w') as f:
+                f.write(tokenizer.to_json())
 
     else:
         with Monitor('load data from data file'):
