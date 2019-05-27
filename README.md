@@ -26,3 +26,19 @@ embedding_data_file_name = '/home/jp/workspace/imdb-embedding.npz'
 ```shell
 $ python dense.py
 ```
+
+```shell
+$ python one_hot.py
+```
+
+```shell
+$ python embedding.py
+```
+
+```shell
+$ python rnn.py
+```
+
+```shell
+$ python lstm.py
+```
