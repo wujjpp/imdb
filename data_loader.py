@@ -3,6 +3,7 @@ import numpy as np
 from progress.bar import Bar
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
+from keras_preprocessing.text import tokenizer_from_json
 import gc
 from monitor import Monitor
 
@@ -19,6 +20,9 @@ one_hot_tokenizer_json_file_name = os.path.join(base_dir,
 embedding_data_file_name = os.path.join(base_dir, 'imdb-embedding.npz')
 embedding_tokenizer_json_file_name = os.path.join(
     base_dir, 'imdb-embedding-tokenizer.json')
+
+__one_hot_tokenizer = None
+__embedding_tokenizer = None
 
 
 def __load_original_data(text_dir):
@@ -102,6 +106,15 @@ def load_one_hot_data(max_words=10000):
     return (x_train, y_train), (x_test, y_test)
 
 
+def get_one_hot_tokenizer():
+    global __one_hot_tokenizer
+    if not __one_hot_tokenizer:
+        with open(one_hot_tokenizer_json_file_name, 'r') as f:
+            __one_hot_tokenizer = tokenizer_from_json(f.read())
+
+    return __one_hot_tokenizer
+
+
 def load_embedding_data(max_words=10000, maxlen=200):
     if not os.path.exists(embedding_data_file_name):
         tokenizer = Tokenizer(num_words=max_words)
@@ -154,3 +167,12 @@ def load_embedding_data(max_words=10000, maxlen=200):
                            padding='post',
                            truncating='post')
     return (x_train, y_train), (x_test, y_test)
+
+
+def get_embedding_tokenizer():
+    global __embedding_tokenizer
+    if not __embedding_tokenizer:
+        with open(one_hot_tokenizer_json_file_name, 'r') as f:
+            __embedding_tokenizer = tokenizer_from_json(f.read())
+
+    return __embedding_tokenizer
