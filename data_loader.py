@@ -6,6 +6,8 @@ from keras.preprocessing.sequence import pad_sequences
 import gc
 from monitor import Monitor
 
+# download data from: http://mng.bz/0tIo
+
 imbd_dir = '/home/jp/workspace/aclImdb'
 train_dir = os.path.join(imbd_dir, 'train')
 test_dir = os.path.join(imbd_dir, 'test')
