@@ -1,4 +1,4 @@
-# Deep learning based on Keras - 二分类问题
+# Deep learning with Keras - 二分类问题
 
 ## 环境准备
 
