@@ -20,3 +20,9 @@ test_dir = os.path.join(imbd_dir, 'test')
 one_hot_data_file_name = '/home/jp/workspace/imdb-one-hot.npz'
 embedding_data_file_name = '/home/jp/workspace/imdb-embedding.npz'
 ```
+
+## 运行
+
+```shell
+$ python dense.py
+```
